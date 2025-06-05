@@ -3,20 +3,20 @@ import { imageTemplate } from './js/render-functions.js';
 
 const formElem = document.querySelector('form');
 const inputElem = document.querySelectorAll('input[type="text"]');
-const loader = document.getElementById('loader');
+const loader = document.querySelector('.loader');
 
 formElem.addEventListener('submit', e => {
     e.preventDefault();
     const query = e.target.elements['search-text'].value.trim();
     if (!query) return;
 
-    loader.style.display = 'block';
+    loader.classList.add('active');
 
     getImagesByQuery(query)
     .then(({ hits }) => imageTemplate(hits))
     .catch(console.error)
     .finally(() => {
-        loader.style.display = 'none';
+        loader.classList.remove('active'); 
     });
 });
 
